@@ -12,21 +12,22 @@ task gatk4_m2_maflite_task_1 {
 
     command {
         set -euo pipefail
+        set -x
         julia --version
         ls -la /opt/src
         ls -la
         ls -la ${M2_vcf_file}
         
-        /opt/src/gatk4_m2_maflite.sh \"${tumor_id}\" \"${normal_id}\" \"${pair_id}\" \"${M2_vcf_file}\"
+        /opt/src/gatk4_m2_maflite.sh ${tumor_id} ${normal_id} ${pair_id} ${M2_vcf_file}
 
-        tar cvfz m2_maflite.tar.gz tmp1.tsv ${pair_id}.raw.tsv ${pair_id}.m2.all.maflite.tsv ${pair_id}.m2.pass.maflite.tsv
+        tar cvfz ${pair_id}.m2_maflite.tar.gz tmp1.tsv ${pair_id}.raw.tsv ${pair_id}.m2.all.maflite.tsv ${pair_id}.m2.pass.maflite.tsv
 
     }
 
     output {
         File m2_pass_maflite="${pair_id}.m2.pass.maflite.tsv"
         File m2_all_maflite="${pair_id}.m2.all.maflite.tsv"
-        File m2_maflite_tarball="m2_maflite.tar.gz"
+        File m2_maflite_tarball="${pair_id}.m2_maflite.tar.gz"
     }
 
     runtime {
