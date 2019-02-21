@@ -14,7 +14,7 @@ pair_id=ARGS[4]
 file1a=pair_id*".raw.tsv"
 
 isString(x::Number)=false
-#isString(x::DataArrays.NAtype)=false
+isString(x::Missing)=false
 isString(x::AbstractString)=true
 
 df = readtable(file1)
