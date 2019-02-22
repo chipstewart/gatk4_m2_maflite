@@ -208,7 +208,7 @@ rename!(df, [f => t  for (f,t) = zip([:CHRO,:POS, :REF, :ALT], [:chr, :start, :r
 
 maf=df
 
-permutecols!(maf, [:chr,:start,:end,:ref_allele,:alt_allele,:tumor_barcode,:normal_barcode,:POPAF,:NLOD,:PON,:TLOD,:build,:judgement,:n_alt_count,:n_ref_count,:t_lod_fstar,:t_alt_count,:t_ref_count,:NORMAL_AD_REF,:NORMAL_AD_ALT,:TUMOR_AD_REF,:TUMOR_AD_ALT,:FILTER,:multiAlt, :MNP, :DEL, :INS])
+permutecols!(maf, [:chr,:start,:end,:ref_allele,:alt_allele,:tumor_barcode,:normal_barcode,:POPAF,:NLOD,:PON,:TLOD,:build,:judgement,:n_alt_count,:n_ref_count,:t_lod_fstar,:t_alt_count,:t_ref_count,:NORMAL_AD_REF,:NORMAL_AD_ALT,:TUMOR_AD_REF,:TUMOR_AD_ALT,:FILTER,:multiALT, :MNP, :DEL, :INS])
 
 for c in names(maf)
     #println(c)
