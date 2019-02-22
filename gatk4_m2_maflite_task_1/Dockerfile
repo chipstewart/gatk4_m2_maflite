@@ -81,6 +81,7 @@ RUN julia -e 'using Pkg; Pkg.add("Libz")'
 RUN julia -e 'using Pkg; Pkg.add("GZip")'
 RUN julia -e 'using Pkg; Pkg.add("Statistics")'
 RUN julia -e 'using Pkg; Pkg.add("DelimitedFiles")'
+RUN julia -e 'using Pkg; Pkg.add("CSV")'
 RUN julia -e 'using Pkg; Pkg.update()'
 
 #copy contents of tasks/<taskname>/build/src on the build host into /opt/src on the docker
