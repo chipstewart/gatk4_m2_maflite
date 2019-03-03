@@ -23,7 +23,7 @@ df=CSV.File(file1,delim='\t') |> DataFrame
 # describe(df)
 # print(df)
 FIELDS=names(df)
-FIELDSK=[:CHRO, :POS, :REF, :ALT, :FILTER, :POPAF, :NLOD, :PON, :TLOD, :NORMAL_AD_REF, :NORMAL_AD_ALT, :TUMOR_AD_REF, :TUMOR_AD_ALT]
+FIELDSK=[:CHRO, :POS, :REF, :ALT, :FILTER, :POPAF, :NLOD, :PON, :TLOD, :NORMAL_AD_REF, :NORMAL_AD_ALT, :TUMOR_AD_REF, :TUMOR_AD_ALT,:VCF_REF,:VCF_ALT,:VCF_POS]
 
 for i=1:length(FIELDS)
     if ~(FIELDS[i] in FIELDSK)
@@ -31,6 +31,9 @@ for i=1:length(FIELDS)
     end
 end
 
+df[:VCF_REF]=df[:REF]
+df[:VCF_ALT]=df[:ALT]
+df[:VCF_POS]=df[:POS]
 
 for c in names(df)
     println(c)
