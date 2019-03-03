@@ -1,5 +1,5 @@
 #!/usr/local/bin/julia
-# ARGS=["020TD","020ND","/opt/test/tmp3.tsv","020_pair"]
+# ARGS=["753TD","753ND","tmp3.tsv","753_pair"]
 
 using DataFrames
 using CSV
@@ -23,7 +23,7 @@ df=CSV.File(file1,delim='\t') |> DataFrame
 # describe(df)
 # print(df)
 FIELDS=names(df)
-FIELDSK=[:CHRO, :POS, :REF, :ALT, :FILTER, :POPAF, :NLOD, :PON, :TLOD, :NORMAL_AD_REF, :NORMAL_AD_ALT, :TUMOR_AD_REF, :TUMOR_AD_ALT,:VCF_REF,:VCF_ALT,:VCF_POS]
+FIELDSK=[:CHRO, :POS, :REF, :ALT, :FILTER, :POPAF, :NLOD, :PON, :TLOD, :NORMAL_AD_REF, :NORMAL_AD_ALT, :TUMOR_AD_REF, :TUMOR_AD_ALT]
 
 for i=1:length(FIELDS)
     if ~(FIELDS[i] in FIELDSK)
@@ -31,13 +31,16 @@ for i=1:length(FIELDS)
     end
 end
 
-df[:VCF_REF]=df[:REF]
-df[:VCF_ALT]=df[:ALT]
-df[:VCF_POS]=df[:POS]
+df[:VCF_REF]=map(x->x,df[:REF])
+df[:VCF_ALT]=map(x->x,df[:ALT])
+df[:VCF_POS]=map(x->x,df[:POS])
 
 for c in names(df)
     println(c)
     k=ismissing(df[c])
+    if k == false
+        continue
+    end
     if Statistics.mean(k)==1.0
         deletecols!(df, c)
         continue
